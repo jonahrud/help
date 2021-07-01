@@ -1,0 +1,91 @@
+    Private Sub BtnClearSession_Click(sender As Object, e As EventArgs) Handles btnClearSession.Click
+        Try
+            Dim xlApp As Excel.Application
+            Dim xlWorkBooks As Excel.Workbooks
+            Dim xlWorkBook As Excel.Workbook
+            Dim xlWorkSheet As Excel.Worksheet
+
+            xlApp = New Excel.Application()
+            xlWorkBooks = xlApp.Workbooks
+            xlWorkBook = xlWorkBooks.Open(frmMainMenu.directory)
+
+            If chkSession1.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(0).month)
+
+                MsgBox(xlWorkSheet.Cells(dailyAppointments(0).row, dailyAppointments(0).column).Value)
+
+                xlWorkSheet.Cells(dailyAppointments(0).row, dailyAppointments(0).column) = ""
+
+                MsgBox(xlWorkSheet.Cells(dailyAppointments(0).row, dailyAppointments(0).column).Value)
+
+                dailyAppointments(0).patient = "No Session (Empty)"
+                chkSession1.Checked = False
+            End If
+
+            If chkSession2.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(1).month)
+                xlWorkSheet.Cells(dailyAppointments(1).row, dailyAppointments(1).column) = ""
+                dailyAppointments(1).patient = "No Session (Empty)"
+                chkSession2.Checked = False
+            End If
+
+            If chkSession3.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(2).month)
+                xlWorkSheet.Cells(dailyAppointments(2).row, dailyAppointments(2).column) = ""
+                dailyAppointments(2).patient = "No Session (Empty)"
+                chkSession3.Checked = False
+            End If
+
+            If chkSession4.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(3).month)
+                xlWorkSheet.Cells(dailyAppointments(3).row, dailyAppointments(3).column) = ""
+                dailyAppointments(3).patient = "No Session (Empty)"
+                chkSession4.Checked = False
+            End If
+
+            If chkSession5.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(4).month)
+                xlWorkSheet.Cells(dailyAppointments(4).row, dailyAppointments(4).column) = ""
+                dailyAppointments(4).patient = "No Session (Empty)"
+                chkSession5.Checked = False
+            End If
+
+            If chkSession6.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(5).month)
+                xlWorkSheet.Cells(dailyAppointments(5).row, dailyAppointments(5).column) = ""
+                dailyAppointments(5).patient = "No Session (Empty)"
+                chkSession6.Checked = False
+            End If
+
+            If chkSession7.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(6).month)
+                xlWorkSheet.Cells(dailyAppointments(6).row, dailyAppointments(6).column) = ""
+                dailyAppointments(6).patient = "No Session (Empty)"
+                chkSession7.Checked = False
+            End If
+
+            If chkSession8.Checked = True Then
+                xlWorkSheet = xlWorkBook.Worksheets(dailyAppointments(7).month)
+                xlWorkSheet.Cells(dailyAppointments(7).row, dailyAppointments(7).column) = ""
+                dailyAppointments(7).patient = "No Session (Empty)"
+                chkSession8.Checked = False
+            End If
+
+            xlWorkBook.Save()
+            xlWorkBook.Close()
+            xlApp.Quit()
+
+            xlWorkSheet = Nothing
+            xlWorkBook = Nothing
+            xlWorkBooks = Nothing
+            xlApp = Nothing
+
+            GC.Collect()
+            GC.WaitForPendingFinalizers()
+            GC.Collect()
+            GC.WaitForPendingFinalizers()
+
+            updateTimetable()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
